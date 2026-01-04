@@ -1,0 +1,33 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="godot-super-sprint-starter"
+run/main_scene="uid://gqdstw6n42rk"
+config/features=PackedStringArray("4.5", "Mobile")
+config/icon="uid://yyr47gbb1gym"
+
+[display]
+
+window/stretch/mode="canvas_items"
+
+[editor]
+
+naming/scene_name_casing=1
+naming/script_name_casing=1
+
+[layer_names]
+
+2d_physics/layer_1="car"
+
+[rendering]
+
+renderer/rendering_method="mobile"
