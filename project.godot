@@ -15,6 +15,10 @@ run/main_scene="uid://gqdstw6n42rk"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="uid://yyr47gbb1gym"
 
+[autoload]
+
+EventHub="*res://Globals/EventHub.gd"
+
 [display]
 
 window/stretch/mode="canvas_items"
