@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dknnoxlghw3qv"]
+
+[ext_resource type="Script" uid="uid://oucgggvbgo4q" path="res://Scenes/TrackProcessor/TrackProcessor.gd" id="1_gdbed"]
+
+[node name="TrackProcessor" type="PathFollow2D"]
+loop = false
+script = ExtResource("1_gdbed")
+interval = 60.0
+grid_space = 80.0

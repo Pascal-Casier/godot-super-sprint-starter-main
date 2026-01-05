@@ -5,11 +5,21 @@ class_name Track
 @onready var track_path: Path2D = $TrackPath
 @onready var verifications_holder: Node = $VerificationsHolder
 @onready var cars_holder: Node = $CarsHolder
+@onready var track_processor: TrackProcessor = $TrackPath/TrackProcessor
+@onready var waypoints_holder: Node = $WaypointsHolder
 
 var _track_curve : Curve2D
 
 func _ready() -> void:
+	await setup()
+			
+func setup() -> void:
 	_track_curve = track_path.curve
+	
+	track_processor.build_waypoint_data(waypoints_holder)
+	
+	await track_processor.build_completed
+	
 	for car in cars_holder.get_children():
 		if car is Car:
 			car.setup(verifications_holder.get_children().size())

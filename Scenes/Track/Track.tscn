@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://gqdstw6n42rk"]
+[gd_scene load_steps=12 format=3 uid="uid://gqdstw6n42rk"]
 
 [ext_resource type="Script" uid="uid://e256etg8nsqi" path="res://Scenes/Track/Track.gd" id="1_0do6f"]
 [ext_resource type="Texture2D" uid="uid://2msta3ane5h5" path="res://Assets/Images/WaterBg.png" id="1_okhpi"]
 [ext_resource type="Texture2D" uid="uid://xvjcmagfi6d2" path="res://Assets/Images/track-craft-professional-1766859469981.png" id="2_0ld5s"]
 [ext_resource type="PackedScene" uid="uid://cg1mlwxhlujj2" path="res://Scenes/Car/Car.tscn" id="3_0ld5s"]
+[ext_resource type="PackedScene" uid="uid://dknnoxlghw3qv" path="res://Scenes/TrackProcessor/TrackProcessor.tscn" id="5_2lgdg"]
 [ext_resource type="PackedScene" uid="uid://1olejsy54lgw" path="res://Scenes/OilDropper/OilDropper.tscn" id="5_vfgym"]
 [ext_resource type="Texture2D" uid="uid://dec3bup5l0rha" path="res://Assets/Images/FinishLine.png" id="6_wtm8k"]
 [ext_resource type="PackedScene" uid="uid://34fniyu6cog" path="res://Scenes/VerificationVerification/Verification.tscn" id="7_6d5m8"]
@@ -32,14 +33,14 @@ scale = Vector2(2, 2)
 texture = ExtResource("2_0ld5s")
 
 [node name="TrackCollision" type="Area2D" parent="."]
-collision_layer = 0
+collision_layer = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TrackCollision"]
 position = Vector2(13, 1)
 polygon = PackedVector2Array(-114, -112, -141, -66, -138, 222, -118, 255, -48, 316, -9, 409, -12, 520, -10, 571, 12, 603, 37, 602, 117, 529, 185, 464, 334, 418, 595, 437, 636, 448, 1043, 474, 1090, 466, 1486, 608, 1525, 608, 1544, 575, 1542, -127, 1525, -175, 1486, -185, 1441, -166, 1302.3921, -71.10336, 1280, -67, 1077, 90, 955, 194, 820, 263, 710, 292, 491, 296, 390, 266, 327, 178, 325, 46, 374, -80, 346, -125, -80, -124)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="TrackCollision"]
-polygon = PackedVector2Array(-403, -724, 2193, -752, 2299, 1132, -812, 1183, -637, -765, -228, -274, -311, -188, -287, 108, -283, 256, -197, 367, -137, 427, -133, 487, -148, 558, -157, 618, -99, 729, 26, 764, 169, 708, 266, 603, 332, 577, 570, 581, 1076, 611, 1520, 777, 1623, 753, 1691, 689, 1715, 584, 1700, 438, 1710, -150, 1691, -250, 1640, -319, 1560, -355, 1475, -355, 1372, -287, 834, 97, 714, 131, 602, 144, 529, 133, 489, 80, 506, 20, 538, -51, 549, -143, 508, -235, 390, -291, 257, -289, -212, -282, -487, -628)
+polygon = PackedVector2Array(-403, -724, 2193, -752, 2299, 1132, -812, 1183, -637, -765, -206, -269, -303, -156, -287, 108, -283, 256, -197, 367, -137, 427, -133, 487, -148, 558, -157, 618, -99, 729, 26, 764, 169, 708, 266, 603, 332, 577, 570, 581, 1076, 611, 1520, 777, 1623, 753, 1691, 689, 1715, 584, 1700, 438, 1710, -150, 1691, -250, 1640, -319, 1560, -355, 1475, -355, 1372, -287, 834, 97, 714, 131, 602, 144, 529, 133, 489, 80, 506, 20, 538, -51, 549, -143, 508, -235, 390, -291, 257, -289, -202, -273, -487, -628)
 
 [node name="TrackPath" type="Path2D" parent="."]
 position = Vector2(12, 0)
@@ -52,11 +53,15 @@ debug = false
 oil_container = NodePath("../../OilContainer")
 drop_time_var = Vector2(300, 500)
 
+[node name="TrackProcessor" parent="TrackPath" instance=ExtResource("5_2lgdg")]
+position = Vector2(1110, 547)
+rotation = 0.28805545
+
 [node name="OilContainer" type="Node" parent="."]
 
 [node name="StartLine" type="Area2D" parent="."]
-position = Vector2(915.99994, 525)
-rotation = -1.4950461
+position = Vector2(1143.0001, 555)
+rotation = -1.2456477
 collision_layer = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="StartLine"]
@@ -80,12 +85,14 @@ position = Vector2(-212, 164)
 [node name="CarsHolder" type="Node" parent="."]
 
 [node name="Car" parent="CarsHolder" instance=ExtResource("3_0ld5s")]
-position = Vector2(645, 501)
+position = Vector2(1047, 522)
 collision_mask = 0
 max_speed = 400.0
 friction = 350.0
 
 [node name="RaceController" parent="." instance=ExtResource("8_pxc04")]
+
+[node name="WaypointsHolder" type="Node" parent="."]
 
 [connection signal="area_entered" from="TrackCollision" to="." method="_on_track_collision_area_entered"]
 [connection signal="area_entered" from="StartLine" to="." method="_on_start_line_area_entered"]
