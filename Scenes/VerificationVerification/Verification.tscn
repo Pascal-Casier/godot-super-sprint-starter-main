@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://34fniyu6cog"]
+
+[ext_resource type="Script" uid="uid://gq6hf7im1url" path="res://Scenes/VerificationVerification/Verification.gd" id="1_6h5lr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4mnbd"]
+size = Vector2(160, 5)
+
+[node name="Verification" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_6h5lr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4mnbd")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
