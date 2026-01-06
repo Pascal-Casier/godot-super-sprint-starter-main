@@ -2,7 +2,7 @@ extends Area2D
 
 class_name  Car
 
-enum CarState { DRIVING, BOUNCING, SLIPPING}
+enum CarState { WAITING, DRIVING, BOUNCING, SLIPPING}
 
 @export var car_texture : Texture2D = preload("res://Assets/Images/CarRed.png")
 @export var car_name : String = "Maisy"
@@ -19,13 +19,16 @@ var _velocity : float = 0.0
 var _bounce_tween : Tween
 var _slip_tween : Tween
 var _bounce_target : Vector2 = Vector2.ZERO
-var _state : CarState = CarState.DRIVING
+var _state : CarState = CarState.WAITING
 var _lap_time : float = 0.0
 
 func _ready() -> void:
+	EventHub.on_race_start.connect(on_race_start)
+	set_physics_process(false)
 	car_sprite.texture = car_texture
 
-
+func on_race_start() -> void:
+	change_state(CarState.DRIVING)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func _process(delta: float) -> void:
@@ -44,8 +47,8 @@ func change_state(new_state : CarState) -> void:
 			bounce()
 		CarState.SLIPPING:
 			slip_on_oil()
-		CarState.BOUNCING:
-			pass
+		CarState.DRIVING:
+			set_physics_process(true)
 #endregion
 
 #region  Bounce

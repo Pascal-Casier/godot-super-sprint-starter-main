@@ -6,6 +6,8 @@ const STEER_REACTION_MAX : float = 9.0
 
 @export var debug : bool = true
 @export var waypoint_distance : float = 20.0
+@export var max_top_speed_limit : float = 350.0
+@export var min_top_speed_limit : float = 300.0
 
 @onready var target_sprite: Sprite2D = $TargetSprite
 
@@ -17,6 +19,7 @@ var _next_waypoint : Waypoint
 func _ready() -> void:
 	super()
 	target_sprite.visible = debug
+	_target_speed = randf_range(min_top_speed_limit, max_top_speed_limit)
 	
 func update_waypoint() -> void:
 	if global_position.distance_to(_adjusted_waypoint_target) < waypoint_distance:

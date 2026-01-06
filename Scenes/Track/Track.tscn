@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://gqdstw6n42rk"]
+[gd_scene load_steps=17 format=3 uid="uid://gqdstw6n42rk"]
 
 [ext_resource type="Script" uid="uid://e256etg8nsqi" path="res://Scenes/Track/Track.gd" id="1_0do6f"]
 [ext_resource type="Texture2D" uid="uid://2msta3ane5h5" path="res://Assets/Images/WaterBg.png" id="1_okhpi"]
@@ -11,6 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://d06t4uidc0jf8" path="res://Scenes/RaceController/RaceController.tscn" id="8_pxc04"]
 [ext_resource type="PackedScene" uid="uid://djyaytjfa6yp5" path="res://Scenes/Car/CpuCar.tscn" id="9_iwdkm"]
 [ext_resource type="Texture2D" uid="uid://pndhsqg7v7iu" path="res://Assets/Images/CarBlue.png" id="10_pptq5"]
+[ext_resource type="Texture2D" uid="uid://dlry4iqrl31mt" path="res://Assets/Images/CarGreen.png" id="11_m1acf"]
+[ext_resource type="Texture2D" uid="uid://dr8u06xrl4yv6" path="res://Assets/Images/CarPurple.png" id="12_cc6kv"]
+[ext_resource type="PackedScene" uid="uid://bx0trj8wkc4gu" path="res://Scenes/Countdown/Countdown.tscn" id="14_cc6kv"]
 
 [sub_resource type="Curve2D" id="Curve2D_0do6f"]
 _data = {
@@ -53,7 +56,6 @@ position = Vector2(1110, 547)
 rotation = 0.28805545
 debug = false
 oil_container = NodePath("../../OilContainer")
-drop_time_var = Vector2(300, 500)
 
 [node name="TrackProcessor" parent="TrackPath" instance=ExtResource("5_2lgdg")]
 position = Vector2(1110, 547)
@@ -87,15 +89,37 @@ position = Vector2(-212, 164)
 [node name="CarsHolder" type="Node" parent="."]
 
 [node name="PlayerCar" parent="CarsHolder" instance=ExtResource("8_2lgdg")]
-position = Vector2(893, 532)
+position = Vector2(1019, 516)
+car_name = "Jabba"
 
 [node name="CpuCar" parent="CarsHolder" instance=ExtResource("9_iwdkm")]
-position = Vector2(1061, 562)
+position = Vector2(1016, 562)
+debug = true
 car_texture = ExtResource("10_pptq5")
+
+[node name="CpuCar2" parent="CarsHolder" instance=ExtResource("9_iwdkm")]
+position = Vector2(1076, 525)
+debug = true
+max_top_speed_limit = 320.0
+min_top_speed_limit = 250.0
+car_texture = ExtResource("11_m1acf")
+car_name = "Fred"
+
+[node name="CpuCar3" parent="CarsHolder" instance=ExtResource("9_iwdkm")]
+position = Vector2(1067, 572)
+debug = true
+max_top_speed_limit = 260.0
+min_top_speed_limit = 200.0
+car_texture = ExtResource("12_cc6kv")
+car_name = "Flossy"
 
 [node name="RaceController" parent="." instance=ExtResource("8_pxc04")]
 
 [node name="WaypointsHolder" type="Node" parent="."]
+
+[node name="UiCanvas" type="CanvasLayer" parent="."]
+
+[node name="Countdown" parent="UiCanvas" instance=ExtResource("14_cc6kv")]
 
 [connection signal="area_entered" from="TrackCollision" to="." method="_on_track_collision_area_entered"]
 [connection signal="area_entered" from="StartLine" to="." method="_on_start_line_area_entered"]

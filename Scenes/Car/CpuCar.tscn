@@ -8,9 +8,11 @@
 script = ExtResource("2_cv55x")
 debug = false
 waypoint_distance = 20.0
+max_top_speed_limit = 350.0
+min_top_speed_limit = 300.0
 
 [node name="TargetSprite" type="Sprite2D" parent="." index="3"]
 modulate = Color(1, 0.26666668, 0.1882353, 1)
 top_level = true
-scale = Vector2(0.15, 0.15)
+scale = Vector2(0.05, 0.05)
 texture = ExtResource("3_or3o6")
