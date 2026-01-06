@@ -21,8 +21,10 @@ func setup() -> void:
 	await track_processor.build_completed
 	
 	for car in cars_holder.get_children():
-		if car is Car:
+		if car is PlayerCar:
 			car.setup(verifications_holder.get_children().size())
+		if car is CpuCar:
+			car.set_next_waypoint(track_processor._first_waypoint)
 	
 func get_direction_to_path(from_pos : Vector2) -> Vector2:
 	var closest_offset : float = _track_curve.get_closest_offset(from_pos)

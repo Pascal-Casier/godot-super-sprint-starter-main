@@ -11,6 +11,13 @@ const WAYPOINT = preload("res://Scenes/Waypoints/Waypoint.tscn")
 
 var _waypoints : Array[Waypoint]
 
+var _first_waypoint : Waypoint:
+	get:
+		if _waypoints.size() == 0:
+			printerr("TrackProcessor first_waypoint not there")
+			return null
+		return _waypoints[0]
+
 func connect_waypoints() -> void:
 	var total_wp : int = _waypoints.size()
 	for i in range(total_wp):
@@ -37,7 +44,7 @@ func generate_waypoints(holder : Node) -> void:
 	
 func build_waypoint_data(holder : Node) -> void:
 	_waypoints.clear()
-	generate_waypoints(holder)
+	await generate_waypoints(holder)
 	connect_waypoints()
 	
 	for wp in _waypoints: print(wp)

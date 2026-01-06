@@ -14,7 +14,7 @@ point_count = 3
 [node name="Car" type="Area2D"]
 script = ExtResource("1_6tdsx")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="CarSprite" type="Sprite2D" parent="."]
 rotation = 1.5707964
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_fnsqd")
@@ -23,8 +23,6 @@ texture = ExtResource("1_fnsqd")
 position = Vector2(-2, 0)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_6tdsx")
-
-[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="CrashEffect" type="CPUParticles2D" parent="."]
 emitting = false
