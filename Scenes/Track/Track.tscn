@@ -109,5 +109,7 @@ wait_time = 0.1
 
 [node name="GameUI" parent="UiCanvas" instance=ExtResource("14_yb8n5")]
 
+[node name="Music" type="AudioStreamPlayer" parent="."]
+
 [connection signal="area_entered" from="TrackCollision" to="." method="_on_track_collision_area_entered"]
 [connection signal="area_entered" from="StartLine" to="." method="_on_start_line_area_entered"]
