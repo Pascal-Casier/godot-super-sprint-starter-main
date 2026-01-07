@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1sbkkdbhb2rm"]
+
+[ext_resource type="PackedScene" uid="uid://gqdstw6n42rk" path="res://Scenes/Track/Track.tscn" id="1_em4ia"]
+[ext_resource type="Texture2D" uid="uid://dse66hhdlvl0d" path="res://Assets/Images/MetalBg.png" id="2_ftmx7"]
+[ext_resource type="Texture2D" uid="uid://dluvnor3vbpyi" path="res://Assets/Images/track-craft-professional-1767813243259.png" id="3_uqujf"]
+
+[sub_resource type="Curve2D" id="Curve2D_ooa1p"]
+_data = {
+"points": PackedVector2Array(-88, 11, 88, -11, 510, 563, -69.3, -30.800001, 69.3, 30.800001, 778, 597, -141.93301, 49.368004, 141.93301, -49.368004, 1192, 832, -74.778, 52.151, 74.778, -52.151, 1457, 559, 39.809, 77.68201, -39.809, -77.68201, 1541, 380, 172.42502, 48.763, -172.42502, -48.763, 1027, 296, 175.45001, -41.14, -175.45001, 41.14, 467, -7, 0, 0, 0, 0, 205, 347, 19.36, -102.850006, -19.36, 102.850006, 62, 612, -62.920002, 4.84, 62.920002, -4.84, 168, 728, -64.130005, 39.93, 64.130005, -39.93, 355, 607, 0, 0, 0, 0, 510, 563)
+}
+point_count = 12
+
+[node name="Monza" instance=ExtResource("1_em4ia")]
+
+[node name="Background" parent="." index="0"]
+texture = ExtResource("2_ftmx7")
+
+[node name="TrackImage" parent="." index="1"]
+position = Vector2(1009, 389)
+scale = Vector2(2, 2)
+texture = ExtResource("3_uqujf")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TrackCollision" index="0"]
+polygon = PackedVector2Array(1161, 785, 1224, 778, 1314, 687, 1393, 567, 1471, 479, 1521, 444, 1525, 404, 1493, 378, 1193, 378, 1095, 376, 972, 343, 815, 232, 617, 84, 519, 31, 464, 35, 407, 75, 366, 158, 289, 356, 243, 437, 149, 552, 120, 611, 118, 659, 147, 687, 190, 684, 355, 554, 468, 517, 704, 502, 803, 521, 893, 570, 1002, 680, 1092, 759)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="TrackCollision" index="1"]
+polygon = PackedVector2Array(1232, 914, 1329, 866, 1397, 792, 1474, 651, 1542, 561, 1608, 508, 1650, 435, 1638, 332, 1587, 281, 1455, 265, 1252, 278, 1120, 272, 998, 234, 938, 193, 627, -62, 530, -97, 407, -78, 316, -16, 258, 92, 156, 357, 35, 499, -20, 621, -1, 708, 38, 774, 117, 818, 226, 813, 360, 690, 458, 634, 663, 621, 777, 632, 888, 727, 1048, 885, 1159, 921, 1224, 916, 1228, 1051, -303, 1003, -364, -414, 2355, -348, 2116, 1131, 1276, 1070)
+
+[node name="TrackPath" parent="." index="3"]
+curve = SubResource("Curve2D_ooa1p")
+
+[node name="OilDropper" parent="TrackPath" index="0"]
+position = Vector2(510, 563)
+rotation = -0.124354996
+
+[node name="TrackProcessor" parent="TrackPath" index="1"]
+position = Vector2(510, 563)
+rotation = -0.124354996
+
+[node name="StartLine" parent="." index="5"]
+position = Vector2(504.00003, 568.00006)
+rotation = -1.6082525
+
+[node name="Verification" parent="VerificationsHolder" index="0"]
+position = Vector2(1445, 556)
+rotation = 0.61085975
+
+[node name="Verification2" parent="VerificationsHolder" index="1"]
+position = Vector2(384, 3)
+rotation = 0.9265206
+
+[node name="Verification3" parent="VerificationsHolder" index="2"]
+position = Vector2(45, 644)
+rotation = -0.11663167
+
+[node name="CpuCar" parent="CarsHolder" index="0"]
+position = Vector2(401, 597)
+rotation = -0.21955034
+
+[node name="CpuCar2" parent="CarsHolder" index="1"]
+position = Vector2(461, 560)
+rotation = -0.21955034
+
+[node name="CpuCar3" parent="CarsHolder" index="2"]
+position = Vector2(452, 607)
+rotation = -0.21955034
+
+[node name="PlayerCar" parent="CarsHolder" index="3"]
+position = Vector2(404, 563)
+rotation = -0.21955034
+car_name = "Squale"

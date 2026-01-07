@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://md4gf8topcex"]
+
+[ext_resource type="PackedScene" uid="uid://gqdstw6n42rk" path="res://Scenes/Track/Track.tscn" id="1_cdbg1"]
+[ext_resource type="Texture2D" uid="uid://bv4p2obeldpqh" path="res://Assets/Images/GrassBg.png" id="2_gvuon"]
+[ext_resource type="Texture2D" uid="uid://o6hasqam5inb" path="res://Assets/Images/track-craft-professional-1767725366331.png" id="3_yrsdj"]
+
+[sub_resource type="Curve2D" id="Curve2D_xtvjl"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1221, 1039, 9.431793, 89.602036, -9.431793, -89.602036, 1423, 947, 14.14769, 61.306656, -14.14769, -61.306656, 1306, 792, -25.937431, 58.948708, 25.937431, -58.948708, 1317, 504, 56.59076, 132.0451, -56.59076, -132.0451, 1987, 207, 70.73845, -87.24409, -70.73845, 87.24409, 1103, 174, 68.3805, -35.369225, -68.3805, 35.369225, 902, 450, 51.874863, 11.7897415, -51.874863, -11.7897415, 669, 452, 122.61331, -21.221535, -122.61331, 21.221535, 219, 183, 0, 0, 0, 0, 155, 582, -63.664604, -115.53947, 63.664604, 115.53947, 204, 980, -190.9938, 7.073845, 190.9938, -7.073845, 957, 1042, 0, 0, 0, 0, 1221, 1039)
+}
+point_count = 13
+
+[node name="Silverstone" instance=ExtResource("1_cdbg1")]
+
+[node name="Background" parent="." index="0"]
+position = Vector2(994, 472)
+texture = ExtResource("2_gvuon")
+
+[node name="TrackImage" parent="." index="1"]
+position = Vector2(1017, 520)
+scale = Vector2(2, 2)
+texture = ExtResource("3_yrsdj")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TrackCollision" index="0"]
+polygon = PackedVector2Array(247, 237, 252, 947, 1374, 952, 1235, 855, 1219, 685, 1237, 483, 1322, 391, 1938, 221, 1914, 200, 1167, 207, 1124, 233, 964, 520, 827, 565, 657, 551, 466, 428)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="TrackCollision" index="1"]
+polygon = PackedVector2Array(1419, 1103, 1509, 1042, 1537, 933, 1487, 829, 1393, 785, 1367, 773, 1376, 544, 2049, 355, 2112, 219, 2065, 96, 1935, 37, 1096, 63, 1018, 117, 870, 379, 719, 395, 627, 365, 297, 79, 148, 84, 98, 141, 103, 1006, 157, 1084, 285, 1115, 1411, 1106, 1428, 1418, -324, 1421, -280, 147, 87, -368, 2438, -227, 2319, 1082, 1459, 1415)
+
+[node name="TrackPath" parent="." index="3"]
+curve = SubResource("Curve2D_xtvjl")
+
+[node name="OilDropper" parent="TrackPath" index="0"]
+position = Vector2(1221, 1039)
+rotation = -0.011340994
+
+[node name="TrackProcessor" parent="TrackPath" index="1"]
+position = Vector2(1221, 1039)
+rotation = -0.011340994
+
+[node name="StartLine" parent="." index="5"]
+position = Vector2(1167, 1034)
+rotation = -1.5949452
+
+[node name="Verification" parent="VerificationsHolder" index="0"]
+position = Vector2(1650, 376)
+rotation = 1.2983148
+
+[node name="Verification2" parent="VerificationsHolder" index="1"]
+position = Vector2(1005, 300)
+rotation = -2.5791864
+
+[node name="Verification3" parent="VerificationsHolder" index="2"]
+position = Vector2(172, 874)
+
+[node name="CpuCar" parent="CarsHolder" index="0"]
+position = Vector2(1013, 1052)
+
+[node name="CpuCar2" parent="CarsHolder" index="1"]
+position = Vector2(1073, 1015)
+
+[node name="CpuCar3" parent="CarsHolder" index="2"]
+position = Vector2(1064, 1062)
+
+[node name="PlayerCar" parent="CarsHolder" index="3"]
+position = Vector2(1016, 1018)

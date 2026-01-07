@@ -13,12 +13,14 @@ const OIL = preload("res://Scenes/Oil/Oil.tscn")
 @onready var debug_dot: Sprite2D = $DebugDot
 @onready var drop_timer: Timer = $DropTimer
 
-
+func _enter_tree() -> void:
+	EventHub.on_race_start.connect(start_timer)
+	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	debug_dot.visible = debug
 	progress_ratio = randf()
-	start_timer()
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
