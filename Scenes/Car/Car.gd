@@ -22,6 +22,9 @@ var _bounce_target : Vector2 = Vector2.ZERO
 var _state : CarState = CarState.WAITING
 var _lap_time : float = 0.0
 
+var _verifications_count : int = 0
+var _verifications_passed : Array[int] = []
+
 func _ready() -> void:
 	EventHub.on_race_start.connect(on_race_start)
 	set_physics_process(false)
@@ -29,6 +32,10 @@ func _ready() -> void:
 
 func on_race_start() -> void:
 	change_state(CarState.DRIVING)
+	
+func setup(vc : int) -> void:
+	_verifications_count = vc
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func _process(delta: float) -> void:
@@ -107,5 +114,15 @@ func hit_oil() -> void:
 	change_state(CarState.SLIPPING)
 #endregion
 
+
 func lap_completed() -> void:
+	if _verifications_count == _verifications_passed.size():
+		var lcd : LapCompleteData = LapCompleteData.new(self, _lap_time)
+		print ("LapCompleted %s" % lcd)
+		EventHub.emit_on_lap_completed(lcd)
+	_verifications_passed.clear()
 	_lap_time = 0.0
+
+func hit_verification(verification_id : int) -> void:
+	if verification_id not in _verifications_passed:
+		_verifications_passed.append(verification_id)

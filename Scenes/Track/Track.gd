@@ -7,6 +7,7 @@ class_name Track
 @onready var cars_holder: Node = $CarsHolder
 @onready var track_processor: TrackProcessor = $TrackPath/TrackProcessor
 @onready var waypoints_holder: Node = $WaypointsHolder
+@onready var race_controller: RaceController = $RaceController
 
 var _track_curve : Curve2D
 
@@ -14,6 +15,7 @@ func _ready() -> void:
 	await setup()
 			
 func setup() -> void:
+	var cars : Array[Car] = []
 	_track_curve = track_path.curve
 	
 	track_processor.build_waypoint_data(waypoints_holder)
@@ -21,10 +23,13 @@ func setup() -> void:
 	await track_processor.build_completed
 	
 	for car in cars_holder.get_children():
-		if car is PlayerCar:
+		cars.append(car)
+		if car is Car:
 			car.setup(verifications_holder.get_children().size())
 		if car is CpuCar:
 			car.set_next_waypoint(track_processor._first_waypoint)
+			
+	race_controller.setup(cars, _track_curve)
 	
 func get_direction_to_path(from_pos : Vector2) -> Vector2:
 	var closest_offset : float = _track_curve.get_closest_offset(from_pos)

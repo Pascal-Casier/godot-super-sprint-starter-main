@@ -11,11 +11,8 @@ class_name PlayerCar
 var _throttle : float = 0.0
 var _steer : float = 0.0
 
-var _verifications_count : int = 0
-var _verifications_passed : Array[int] = []
 
-func setup(vc : int) -> void:
-	_verifications_count = vc
+
 
 
 func _process(delta: float) -> void:
@@ -48,14 +45,3 @@ func get_steer_factor() -> float:
 func apply_rotation(delta : float) -> void:
 	rotate(get_steer_factor() * delta * _steer)
 	
-func lap_completed() -> void:
-	if _verifications_count == _verifications_passed.size():
-		var lcd : LapCompleteData = LapCompleteData.new(self, _lap_time)
-		print ("LapCompleted %s" % lcd)
-		EventHub.emit_on_lap_completed(lcd)
-	_verifications_passed.clear()
-	super()
-
-func hit_verification(verification_id : int) -> void:
-	if verification_id not in _verifications_passed:
-		_verifications_passed.append(verification_id)
