@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://gqdstw6n42rk"]
+[gd_scene load_steps=16 format=3 uid="uid://gqdstw6n42rk"]
 
 [ext_resource type="Script" uid="uid://e256etg8nsqi" path="res://Scenes/Track/Track.gd" id="1_0do6f"]
 [ext_resource type="Texture2D" uid="uid://2msta3ane5h5" path="res://Assets/Images/WaterBg.png" id="1_okhpi"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://1olejsy54lgw" path="res://Scenes/OilDropper/OilDropper.tscn" id="5_vfgym"]
 [ext_resource type="Texture2D" uid="uid://dec3bup5l0rha" path="res://Assets/Images/FinishLine.png" id="6_wtm8k"]
 [ext_resource type="PackedScene" uid="uid://34fniyu6cog" path="res://Scenes/VerificationVerification/Verification.tscn" id="7_6d5m8"]
-[ext_resource type="PackedScene" uid="uid://dj72m1ivs772h" path="res://Scenes/Car/PlayerCar.tscn" id="8_2lgdg"]
 [ext_resource type="PackedScene" uid="uid://d06t4uidc0jf8" path="res://Scenes/RaceController/RaceController.tscn" id="8_pxc04"]
 [ext_resource type="PackedScene" uid="uid://djyaytjfa6yp5" path="res://Scenes/Car/CpuCar.tscn" id="9_iwdkm"]
 [ext_resource type="Texture2D" uid="uid://pndhsqg7v7iu" path="res://Assets/Images/CarBlue.png" id="10_pptq5"]
@@ -88,10 +87,6 @@ position = Vector2(-212, 164)
 
 [node name="CarsHolder" type="Node" parent="."]
 
-[node name="PlayerCar" parent="CarsHolder" instance=ExtResource("8_2lgdg")]
-position = Vector2(1019, 516)
-car_name = "Jabba"
-
 [node name="CpuCar" parent="CarsHolder" instance=ExtResource("9_iwdkm")]
 position = Vector2(1016, 562)
 debug = true
@@ -114,12 +109,14 @@ car_texture = ExtResource("12_cc6kv")
 car_name = "Flossy"
 
 [node name="RaceController" parent="." instance=ExtResource("8_pxc04")]
+total_laps = 3
 
 [node name="WaypointsHolder" type="Node" parent="."]
 
 [node name="UiCanvas" type="CanvasLayer" parent="."]
 
 [node name="Countdown" parent="UiCanvas" instance=ExtResource("14_cc6kv")]
+wait_time = 0.1
 
 [connection signal="area_entered" from="TrackCollision" to="." method="_on_track_collision_area_entered"]
 [connection signal="area_entered" from="StartLine" to="." method="_on_start_line_area_entered"]

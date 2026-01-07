@@ -27,3 +27,10 @@ func _init(car_name : String, car_number : int, target_laps : int) -> void:
 func add_lap_time(lap_time : float) -> void:
 	_completed_laps += 1
 	_best_lap = min(_best_lap, lap_time)
+
+func set_total_time(total_time : float) -> void:
+	_total_time = total_time
+
+func force_finish(total_time : float, progress : float) -> void:
+	_partial_progress = progress
+	_total_time = _total_time
