@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1bouf068d0qq"]
+
+[ext_resource type="Script" uid="uid://cmvc2p1y21d8w" path="res://Scenes/UI/CarUI/CarUi.gd" id="1_gs4gp"]
+[ext_resource type="LabelSettings" uid="uid://v1skyodxdiki" path="res://Resources/UiLabel14.tres" id="1_i651m"]
+
+[node name="CarUI" type="VBoxContainer"]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_gs4gp")
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 2
+text = "sdff"
+label_settings = ExtResource("1_i651m")
+vertical_alignment = 1
+
+[node name="LapLabel" type="Label" parent="."]
+layout_mode = 2
+text = "lap 2"
+label_settings = ExtResource("1_i651m")
+vertical_alignment = 1
+
+[node name="LastLapLabel" type="Label" parent="."]
+layout_mode = 2
+text = "last : 8,99"
+label_settings = ExtResource("1_i651m")
+vertical_alignment = 1

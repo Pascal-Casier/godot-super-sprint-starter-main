@@ -8,6 +8,7 @@ class_name Track
 @onready var track_processor: TrackProcessor = $TrackPath/TrackProcessor
 @onready var waypoints_holder: Node = $WaypointsHolder
 @onready var race_controller: RaceController = $RaceController
+@onready var game_ui: GameUi = $UiCanvas/GameUI
 
 var _track_curve : Curve2D
 
@@ -30,6 +31,7 @@ func setup() -> void:
 			car.set_next_waypoint(track_processor._first_waypoint)
 			
 	race_controller.setup(cars, _track_curve)
+	game_ui.setup(cars)
 	
 func get_direction_to_path(from_pos : Vector2) -> Vector2:
 	var closest_offset : float = _track_curve.get_closest_offset(from_pos)

@@ -31,8 +31,12 @@ func set_next_waypoint(wp : Waypoint) -> void:
 	target_sprite.global_position = _adjusted_waypoint_target
 	
 func _physics_process(delta: float) -> void:
-	if _state != CarState.DRIVING: return
-	if ! _next_waypoint : return
+	if ! _next_waypoint : 
+		return
+	if _state == CarState.SLIPPING: 
+		update_waypoint()
+	if _state != CarState.DRIVING: 
+		return
 	
 	var ta : float = (_adjusted_waypoint_target - global_position).angle()
 	rotation = lerp_angle(rotation, ta, _steer_reaction * delta)
