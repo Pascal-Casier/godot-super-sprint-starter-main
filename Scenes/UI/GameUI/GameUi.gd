@@ -7,6 +7,12 @@ class_name GameUi
 
 var _car_ui_dict : Dictionary[Car, CarUi] = {}
 
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		GameManager.change_to_main()
+	
+	
 func _enter_tree() -> void:
 	EventHub.on_lap_update.connect(on_lap_update)
 	EventHub.on_race_over.connect(on_race_over)

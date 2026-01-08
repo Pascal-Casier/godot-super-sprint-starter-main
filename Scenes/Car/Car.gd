@@ -13,6 +13,9 @@ enum CarState { WAITING, DRIVING, BOUNCING, SLIPPING, RACEOVER}
 
 @onready var crash_effect: CPUParticles2D = $CrashEffect
 @onready var car_sprite: Sprite2D = $CarSprite
+@onready var engine_sound: AudioStreamPlayer2D = $EngineSound
+@onready var crash_sound: AudioStreamPlayer2D = $CrashSound
+@onready var lap_sound: AudioStreamPlayer2D = $LapSound
 
 
 var _velocity : float = 0.0
@@ -31,6 +34,7 @@ func _ready() -> void:
 	car_sprite.texture = car_texture
 
 func on_race_start() -> void:
+	engine_sound.play()
 	change_state(CarState.DRIVING)
 	
 func setup(vc : int) -> void:
@@ -58,6 +62,7 @@ func change_state(new_state : CarState) -> void:
 		CarState.DRIVING:
 			set_physics_process(true)
 		CarState.RACEOVER:
+			engine_sound.stop()
 			set_physics_process(false)
 #endregion
 
@@ -69,6 +74,7 @@ func bounce_done() -> void:
 func bounce() -> void:
 	_velocity = 0
 	kill_slip_tween()
+	crash_sound.play()
 	if _bounce_tween and _bounce_tween.is_running(): 
 		_bounce_tween.kill()
 		
@@ -101,7 +107,7 @@ func slip_done() -> void:
 func slip_on_oil() -> void:
 	
 	kill_slip_tween()
-		
+	crash_sound.play()
 	rotation_degrees = fmod(rotation_degrees, 360.0)
 	_velocity *= randf_range(slip_speed_range.x, slip_speed_range.y)
 	_slip_tween = create_tween()
@@ -122,6 +128,7 @@ func lap_completed() -> void:
 	if _verifications_count == _verifications_passed.size():
 		var lcd : LapCompleteData = LapCompleteData.new(self, _lap_time)
 		print ("LapCompleted %s" % lcd)
+		lap_sound.play()
 		EventHub.emit_on_lap_completed(lcd)
 	_verifications_passed.clear()
 	_lap_time = 0.0

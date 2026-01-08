@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://gqdstw6n42rk"]
+[gd_scene load_steps=16 format=3 uid="uid://gqdstw6n42rk"]
 
 [ext_resource type="Script" uid="uid://e256etg8nsqi" path="res://Scenes/Track/Track.gd" id="1_0do6f"]
 [ext_resource type="PackedScene" uid="uid://dknnoxlghw3qv" path="res://Scenes/TrackProcessor/TrackProcessor.tscn" id="5_2lgdg"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dlry4iqrl31mt" path="res://Assets/Images/CarGreen.png" id="11_m1acf"]
 [ext_resource type="Texture2D" uid="uid://dr8u06xrl4yv6" path="res://Assets/Images/CarPurple.png" id="12_cc6kv"]
 [ext_resource type="PackedScene" uid="uid://bx0trj8wkc4gu" path="res://Scenes/Countdown/Countdown.tscn" id="14_cc6kv"]
+[ext_resource type="AudioStream" uid="uid://j5ukorijaeag" path="res://Assets/Sounds/8_Bit_Adventure.mp3" id="14_t887p"]
 [ext_resource type="PackedScene" uid="uid://csmy2vdh8n0d4" path="res://Scenes/UI/GameUI/GameUi.tscn" id="14_yb8n5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6d5m8"]
@@ -110,6 +111,10 @@ wait_time = 0.1
 [node name="GameUI" parent="UiCanvas" instance=ExtResource("14_yb8n5")]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_t887p")
+volume_db = -12.0
+autoplay = true
+parameters/looping = true
 
 [connection signal="area_entered" from="TrackCollision" to="." method="_on_track_collision_area_entered"]
 [connection signal="area_entered" from="StartLine" to="." method="_on_start_line_area_entered"]

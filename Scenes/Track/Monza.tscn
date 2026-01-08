@@ -68,4 +68,3 @@ rotation = -0.21955034
 [node name="PlayerCar" parent="CarsHolder" index="3"]
 position = Vector2(404, 563)
 rotation = -0.21955034
-car_name = "Squale"

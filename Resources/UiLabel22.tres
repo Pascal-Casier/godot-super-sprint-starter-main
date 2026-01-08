@@ -1,0 +1,11 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://b6p6eexbfj0b4"]
+
+[ext_resource type="FontFile" uid="uid://bxlbrwr83dlut" path="res://Assets/Fonts/PressStart2P-Regular.ttf" id="1_81p7c"]
+
+[resource]
+font = ExtResource("1_81p7c")
+font_size = 22
+outline_size = 12
+outline_color = Color(0.08072919, 0.07505292, 0.07505292, 1)
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 0.78039217)
