@@ -3,10 +3,19 @@ class_name Waypoint
 
 
 const MAX_RADIUS : float = 300.0
+const COLLISION_MARGIN : float = 10.0
 
 @onready var right_collision: RayCast2D = $RightCollision
 @onready var left_collision: RayCast2D = $LeftCollision
 @onready var label: Label = $Label
+
+var _left_collision_distance : float = 0.0
+var _right_collision_distance : float = 0.0
+var _left_collision_dir : Vector2 = Vector2.ZERO
+var _right_collision_dir : Vector2 = Vector2.ZERO
+var _max_path_deviation : float = 75.0
+
+
 
 var radius : float  = MAX_RADIUS:
 	get : return radius
@@ -48,10 +57,40 @@ func set_radius_factor(min_radius : float, radius_curve : Curve) -> void:
 	var t: float = (adj - min_radius) / (MAX_RADIUS - min_radius)
 	radius_factor = radius_curve.sample(t)
 	
-
+func set_collider_data(max_path_deviation : float) -> void:
+	_max_path_deviation = max_path_deviation
+	
+	_left_collision_distance = left_collision.target_position.length()
+	_right_collision_distance = right_collision.target_position.length()
+	
+	if left_collision.is_colliding():
+		var colp : Vector2 = left_collision.get_collision_point()
+		_left_collision_distance = global_position.distance_to(colp) - COLLISION_MARGIN
+		_left_collision_distance = max(0.0, _left_collision_distance)
+	
+	if right_collision.is_colliding():
+		var colp : Vector2 = right_collision.get_collision_point()
+		_right_collision_distance = global_position.distance_to(colp) - COLLISION_MARGIN
+		_right_collision_distance = max(0.0, _right_collision_distance)
+	
+	_left_collision_dir = Vector2.LEFT.rotated(rotation)
+	_right_collision_dir = Vector2.RIGHT.rotated(rotation)
+	
+func get_target_adjusted(weight : float) -> Vector2:
+	if is_zero_approx(weight): return global_position
+	if weight > 0.0:
+		var deviation : float = weight * _right_collision_distance
+		deviation = clampf(deviation, -_max_path_deviation, _max_path_deviation)
+		return _right_collision_dir * deviation + global_position
+	else:
+		var deviation : float = weight * _left_collision_distance
+		deviation = clampf(deviation, -_max_path_deviation, _max_path_deviation)
+		return global_position - _left_collision_dir * deviation 
+		
+	
 func _to_string() -> String:
-	return "%d next:%d prev: %d rad:%.2f fac %.2f " % [
+	return "%d next:%d prev: %d rad:%.2f fac %.2f lcd: %.2f rcd: %.2f" % [
 		number, next_waypoint.number,prev_waypoint.number,
-		radius, radius_factor
+		radius, radius_factor, _left_collision_distance, _right_collision_distance
 		]
 	

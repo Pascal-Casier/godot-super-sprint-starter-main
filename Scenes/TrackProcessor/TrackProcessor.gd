@@ -8,11 +8,12 @@ const WAYPOINT = preload("res://Scenes/Waypoints/Waypoint.tscn")
 
 @export var interval : float = 50.0
 @export var grid_space : float = 75.0
+@export var max_path_deviation : float = 75.0
 @export var radius_curve : Curve
 
 var _waypoints : Array[Waypoint]
 
-var _first_waypoint: Waypoint:
+var first_waypoint: Waypoint:
 	get:
 		if _waypoints.size() == 0:
 			printerr("TrackProcessor first_waypoint not there")
@@ -49,12 +50,17 @@ func generate_waypoints(holder : Node) -> void:
 		_waypoints.append(wp)
 		progress += interval
 	await get_tree().physics_frame
-	
+
+func setup_wp_collisions() -> void:
+	for wp in _waypoints:
+		wp.set_collider_data(max_path_deviation)
 	
 func build_waypoint_data(holder : Node) -> void:
 	_waypoints.clear()
 	await generate_waypoints(holder)
 	connect_waypoints()
 	calculate_radius()
+	await get_tree().physics_frame
+	setup_wp_collisions()
 	for wp in _waypoints: print(wp)
 	build_completed.emit()

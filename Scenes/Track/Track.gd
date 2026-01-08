@@ -28,7 +28,7 @@ func setup() -> void:
 		if car is Car:
 			car.setup(verifications_holder.get_children().size())
 		if car is CpuCar:
-			car.set_next_waypoint(track_processor._first_waypoint)
+			car.set_next_waypoint(track_processor.first_waypoint)
 			
 	race_controller.setup(cars, _track_curve)
 	game_ui.setup(cars)

@@ -36,7 +36,8 @@ func update_waypoint() -> void:
 	
 func set_next_waypoint(wp : Waypoint) -> void:
 	_next_waypoint = wp
-	_adjusted_waypoint_target = wp.global_position
+	#_adjusted_waypoint_target = wp.global_position
+	_adjusted_waypoint_target = wp.get_target_adjusted(-0.5)
 	target_sprite.global_position = _adjusted_waypoint_target
 	
 func _physics_process(delta: float) -> void:

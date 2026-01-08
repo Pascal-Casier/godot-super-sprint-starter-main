@@ -42,6 +42,7 @@ oil_container = NodePath("../../OilContainer")
 [node name="TrackProcessor" parent="TrackPath" instance=ExtResource("5_2lgdg")]
 position = Vector2(1110, 547)
 rotation = 0.28805545
+max_path_deviation = 50.0
 
 [node name="OilContainer" type="Node" parent="."]
 
