@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="godot-super-sprint-starter"
-run/main_scene="uid://bnxufdl7ikutd"
+run/main_scene="uid://dd2kbvumugkcs"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="uid://yyr47gbb1gym"
 

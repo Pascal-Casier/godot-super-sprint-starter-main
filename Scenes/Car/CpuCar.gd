@@ -8,6 +8,9 @@ const STEER_REACTION_MAX : float = 9.0
 @export var waypoint_distance : float = 20.0
 @export var max_top_speed_limit : float = 350.0
 @export var min_top_speed_limit : float = 300.0
+@export var max_bottom_speed_limit : float = 120.0
+@export var min_bottom_speed_limit : float = 80.0
+@export var speed_reaction : float = 2.0
 
 @onready var target_sprite: Sprite2D = $TargetSprite
 
@@ -24,6 +27,12 @@ func _ready() -> void:
 func update_waypoint() -> void:
 	if global_position.distance_to(_adjusted_waypoint_target) < waypoint_distance:
 		set_next_waypoint(_next_waypoint.next_waypoint)
+		_target_speed = lerp(
+			max_bottom_speed_limit,
+			max_top_speed_limit,
+			_next_waypoint.next_waypoint.radius_factor
+		)
+		#print(car_number, " ", _target_speed)
 	
 func set_next_waypoint(wp : Waypoint) -> void:
 	_next_waypoint = wp
@@ -40,7 +49,7 @@ func _physics_process(delta: float) -> void:
 	
 	var ta : float = (_adjusted_waypoint_target - global_position).angle()
 	rotation = lerp_angle(rotation, ta, _steer_reaction * delta)
-	_velocity = lerp(_velocity, _target_speed, delta)
+	_velocity = lerp(_velocity, _target_speed, delta * speed_reaction)
 	position += transform.x * _velocity * delta
 	
 	update_waypoint()

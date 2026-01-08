@@ -8,15 +8,24 @@ const WAYPOINT = preload("res://Scenes/Waypoints/Waypoint.tscn")
 
 @export var interval : float = 50.0
 @export var grid_space : float = 75.0
+@export var radius_curve : Curve
 
 var _waypoints : Array[Waypoint]
 
-var _first_waypoint : Waypoint:
+var _first_waypoint: Waypoint:
 	get:
 		if _waypoints.size() == 0:
 			printerr("TrackProcessor first_waypoint not there")
 			return null
 		return _waypoints[0]
+
+func calculate_radius() -> void:
+	var min_radius : float = Waypoint.MAX_RADIUS
+	for wp in _waypoints : 
+		wp.calc_turn_radius()
+		min_radius = min(min_radius, wp.radius)
+	for wp in _waypoints:
+		wp.set_radius_factor(min_radius, radius_curve)
 
 func connect_waypoints() -> void:
 	var total_wp : int = _waypoints.size()
@@ -46,6 +55,6 @@ func build_waypoint_data(holder : Node) -> void:
 	_waypoints.clear()
 	await generate_waypoints(holder)
 	connect_waypoints()
-	
+	calculate_radius()
 	for wp in _waypoints: print(wp)
 	build_completed.emit()
